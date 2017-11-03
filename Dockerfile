@@ -39,6 +39,9 @@ RUN cd /opt && \
 RUN echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" >/etc/apt/sources.list.d/bazel.list && \
     curl https://bazel.build/bazel-release.pub.gpg | apt-key add -
 
+####################
+# xvfb, python-opengl, python3-tk, swig, ffmpeg - this is needed for visualizations in OpenAI 
+
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get update && apt-get install -y --allow-unauthenticated \
         build-essential \
@@ -68,6 +71,10 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         python3-pip \
         xvfb \
         python-opengl \
+        cmake \
+        swig \
+        python3-tk \
+        ffmpeg \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
