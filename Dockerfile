@@ -71,13 +71,14 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
         python3-pip \
         xvfb \
         python-opengl \
-        cmake \
-        swig \
-        python3-tk \
-        ffmpeg \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+###################################
+## cmake swig python3-tk ffmpeg \
+## xvfb python-opengl \
+###################################
 
 RUN pip install --upgrade pip && \
     pip3 install --upgrade pip
