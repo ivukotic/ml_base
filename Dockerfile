@@ -45,7 +45,7 @@ RUN echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get update && apt-get install -y --allow-unauthenticated \
     build-essential \
-    cuda-drivers \
+    # cuda-drivers \
     curl \
     git \
     libfreetype6-dev \
