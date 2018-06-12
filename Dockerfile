@@ -1,11 +1,11 @@
-FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
+FROM nvidia/cuda:9.0-cudnn6-devel-ubuntu16.04
 
 LABEL maintainer Ilija Vukotic <ivukotic@cern.ch>
 
 ###################
 #### CUDA stuff
 ###################
-RUN echo "/usr/local/cuda-8.0/lib64/" >/etc/ld.so.conf.d/cuda.conf
+RUN echo "/usr/local/cuda-9.0/lib64/" >/etc/ld.so.conf.d/cuda.conf
 
 # For CUDA profiling, TensorFlow requires CUPTI.
 RUN echo "/usr/local/cuda/extras/CUPTI/lib64/" >>/etc/ld.so.conf.d/cuda.conf
@@ -44,34 +44,34 @@ RUN echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8
 
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get update && apt-get install -y --allow-unauthenticated \
-        build-essential \
-        cuda-drivers \
-        curl \
-        git \
-        libfreetype6-dev \
-        libpng12-dev \
-        libxpm-dev \
-        libzmq3-dev \
-        module-init-tools \
-        pkg-config \
-        python \
-        python-dev \
-        python3 \
-        rsync \
-        software-properties-common \
-        unzip \
-        zip \
-        zlib1g-dev \
-        openjdk-8-jdk \
-        openjdk-8-jre-headless \
-        vim \
-        wget \
-        bazel \
-        python-pip \
-        python3-pip \
-        xvfb \
-        python-opengl \
-        && \
+    build-essential \
+    cuda-drivers \
+    curl \
+    git \
+    libfreetype6-dev \
+    libpng12-dev \
+    libxpm-dev \
+    libzmq3-dev \
+    module-init-tools \
+    pkg-config \
+    python \
+    python-dev \
+    python3 \
+    rsync \
+    software-properties-common \
+    unzip \
+    zip \
+    zlib1g-dev \
+    openjdk-8-jdk \
+    openjdk-8-jre-headless \
+    vim \
+    wget \
+    bazel \
+    python-pip \
+    python3-pip \
+    xvfb \
+    python-opengl \
+    && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
