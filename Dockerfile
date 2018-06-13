@@ -5,7 +5,7 @@ LABEL maintainer Ilija Vukotic <ivukotic@cern.ch>
 ###################
 #### CUDA stuff
 ###################
-RUN echo "/usr/local/cuda-9.0/lib64/" >/etc/ld.so.conf.d/cuda.conf
+RUN echo "/usr/local/cuda-9.2/lib64/" >/etc/ld.so.conf.d/cuda.conf
 
 # For CUDA profiling, TensorFlow requires CUPTI.
 RUN echo "/usr/local/cuda/extras/CUPTI/lib64/" >>/etc/ld.so.conf.d/cuda.conf
