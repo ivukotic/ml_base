@@ -27,9 +27,9 @@ RUN apt-get update && apt-get install curl wget -y
 #### ROOT
 ###################
 RUN cd /opt && \
-    wget -nv https://root.cern.ch/download/root_v6.10.02.Linux-ubuntu16-x86_64-gcc5.4.tar.gz && \
-    tar xzf root_v6.10.02.Linux-ubuntu16-x86_64-gcc5.4.tar.gz && \
-    rm -f root_v6.10.02.Linux-ubuntu16-x86_64-gcc5.4.tar.gz && \
+    wget -nv https://root.cern/download/root_v6.18.00.Linux-ubuntu16-x86_64-gcc5.4.tar.gz && \
+    tar xzf root_v6.18.00.Linux-ubuntu16-x86_64-gcc5.4.tar.gz && \
+    rm -f root_v6.18.00.Linux-ubuntu16-x86_64-gcc5.4.tar.gz && \
     cd /opt/root/ && \
     /bin/bash bin/thisroot.sh
 
@@ -37,8 +37,10 @@ RUN cd /opt && \
 #### Ubuntu packages
 ####################
 # bazel is required for some TensorFlow projects
-RUN echo "deb [arch=amd64] http://storage.googleapis.com/bazel-apt stable jdk1.8" >/etc/apt/sources.list.d/bazel.list && \
+RUN apt-get install openjdk-8-jdk -y &&  \
+    echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list && \
     curl https://bazel.build/bazel-release.pub.gpg | apt-key add -
+
 
 ####################
 # xvfb, python-opengl, python3-tk, swig, ffmpeg - this is needed for visualizations in OpenAI 
