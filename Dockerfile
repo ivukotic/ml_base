@@ -82,5 +82,5 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 ## xvfb python-opengl \
 ###################################
 
-RUN pip install --upgrade pip && \
-    pip3 install --upgrade pip
+RUN pip install --upgrade pip setuptools wheel && \
+    pip3 install --upgrade pip setuptools wheel
