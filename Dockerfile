@@ -48,8 +48,6 @@ RUN apt-get install openjdk-8-jdk -y &&  \
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get update && apt-get install -y --allow-unauthenticated \
     build-essential \
-    curl \
-    wget \
     git \
     libfreetype6-dev \
     libpng12-dev \
