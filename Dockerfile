@@ -47,6 +47,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get update && apt-get install -y --allow-unauthenticated \
     build-essential \
     curl \
+    wget \
     git \
     libfreetype6-dev \
     libpng12-dev \
@@ -65,12 +66,12 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     openjdk-8-jdk \
     openjdk-8-jre-headless \
     vim \
-    wget \
     bazel \
     python-pip \
     python3-pip \
     xvfb \
     python-opengl \
+    libhdf5-dev \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
