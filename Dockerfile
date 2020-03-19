@@ -80,6 +80,8 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 ## cmake swig python3-tk ffmpeg \
 ## xvfb python-opengl \
 ###################################
+# avoid issues for obsolete python 2.7
+RUN pip install --upgrade 'setuptools<45.0.0'
 
-RUN pip install --upgrade pip setuptools wheel && \
+RUN pip install --upgrade pip wheel && \
     pip3 install --upgrade pip setuptools wheel
