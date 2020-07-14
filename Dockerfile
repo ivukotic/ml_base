@@ -57,7 +57,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     pkg-config \
     python \
     python-dev \
-    python37 \
+    python3 \
     rsync \
     software-properties-common \
     unzip \
