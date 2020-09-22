@@ -1,15 +1,15 @@
 
-FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04
+FROM nvidia/cuda:10.1-cudnn7-runtime-ubuntu18.04
 
 LABEL maintainer Ilija Vukotic <ivukotic@cern.ch>
 
 ###################
 #### CUDA stuff
 ###################
-RUN echo "/usr/local/cuda-10.0/lib64/" >/etc/ld.so.conf.d/cuda.conf
+RUN echo "/usr/local/cuda-10.1/lib64/" >/etc/ld.so.conf.d/cuda.conf
 
 # For CUDA profiling, TensorFlow requires CUPTI.
-RUN echo "/usr/local/cuda/extras/CUPTI/lib64/" >>/etc/ld.so.conf.d/cuda.conf
+RUN echo "/usr/local/cuda-10.1/extras/CUPTI/lib64/" >>/etc/ld.so.conf.d/cuda.conf
 
 # make sure we have a way to bind host provided libraries
 # see https://github.com/singularityware/singularity/issues/611
@@ -18,28 +18,29 @@ RUN mkdir -p /host-libs && \
 
 
 #################
-#### curl/wget
+#### curl/wget/software-properties-common
 #################
-RUN apt-get update && apt-get install curl wget -y
-
+RUN apt-get update && apt-get install curl wget software-properties-common -y
+# for newer python
+RUN add-apt-repository ppa:deadsnakes/ppa
 
 ###################
 #### ROOT
 ###################
 RUN cd /opt && \
-    wget -nv https://root.cern/download/root_v6.18.00.Linux-ubuntu16-x86_64-gcc5.4.tar.gz && \
-    tar xzf root_v6.18.00.Linux-ubuntu16-x86_64-gcc5.4.tar.gz && \
-    rm -f root_v6.18.00.Linux-ubuntu16-x86_64-gcc5.4.tar.gz && \
+    wget -nv https://root.cern/download/root_v6.22.00.Linux-ubuntu18-x86_64-gcc7.5.tar.gz && \
+    tar xzf root_v6.22.00.Linux-ubuntu18-x86_64-gcc7.5.tar.gz && \
+    rm -f root_v6.22.00.Linux-ubuntu18-x86_64-gcc7.5.tar.gz && \
     cd /opt/root/ && \
     /bin/bash bin/thisroot.sh
 
 ####################
 #### Ubuntu packages
 ####################
-# bazel is required for some TensorFlow projects
-RUN apt-get install openjdk-8-jdk -y &&  \
-    echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list && \
-    curl https://bazel.build/bazel-release.pub.gpg | apt-key add -
+# bazel is required for rebuild of Tensorflow
+#RUN apt-get install openjdk-8-jdk -y &&  \
+#    echo "deb [arch=amd64] https://storage.googleapis.com/bazel-apt stable jdk1.8" | tee /etc/apt/sources.list.d/bazel.list && \
+#    curl https://bazel.build/bazel-release.pub.gpg | apt-key add -
 
 
 ####################
@@ -50,14 +51,16 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     build-essential \
     git \
     libfreetype6-dev \
-    libpng12-dev \
+    libpng-dev \
     libxpm-dev \
     libzmq3-dev \
     module-init-tools \
     pkg-config \
-    python \
-    python-dev \
-    python3 \
+    python3.8 \
+    python3-venv \
+    python-pip \
+    python3-pip \
+    python3-dev \
     rsync \
     software-properties-common \
     unzip \
@@ -66,9 +69,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     openjdk-8-jdk \
     openjdk-8-jre-headless \
     vim \
-    bazel \
-    python-pip \
-    python3-pip \
+    # bazel \
     xvfb \
     python-opengl \
     libhdf5-dev \
@@ -80,8 +81,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 ## cmake swig python3-tk ffmpeg \
 ## xvfb python-opengl \
 ###################################
-# avoid issues for obsolete python 2.7
-RUN pip install --upgrade 'setuptools<45.0.0'
 
-RUN pip install --upgrade pip wheel && \
-    pip3 install --upgrade pip setuptools wheel
+RUN python -m pip install --upgrade pip setuptools wheel
+RUN python3 -m pip install --upgrade pip setuptools wheel
+RUN python3.8 -m pip install --upgrade pip setuptools wheel
