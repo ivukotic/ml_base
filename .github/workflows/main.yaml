@@ -15,7 +15,7 @@ jobs:
       - name: Docker Build & Push Action
         uses: mr-smithers-excellent/docker-build-push@v5.6
         with:
-          image: ivukotic/ml_platform_auto
+          image: ivukotic/ml_base
           tags: latest, ${{ github.sha }}
           registry: docker.io
           username: ${{ secrets.DOCKER_USERNAME }}
