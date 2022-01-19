@@ -77,6 +77,11 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# RUN apt-get install -y --allow-unauthenticated \
+#     libssl-dev libbz2-dev libreadline-dev libsqlite3-dev llvm \
+#     libncurses5-dev libncursesw5-dev xz-utils tk-dev libffi-dev \
+#     liblzma-dev python-openssl
+
 ###################################
 ## cmake swig python3-tk ffmpeg \
 ## xvfb python-opengl \
@@ -85,3 +90,5 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
 RUN python -m pip install --upgrade pip setuptools wheel
 RUN python3 -m pip install --upgrade pip setuptools wheel
 RUN python3.8 -m pip install --upgrade pip setuptools wheel
+
+
