@@ -1,15 +1,15 @@
 
-FROM nvidia/cuda:10.1-cudnn7-runtime-ubuntu18.04
+FROM nvidia/cuda:11.4.3-devel-ubuntu18.04
 
 LABEL maintainer Ilija Vukotic <ivukotic@cern.ch>
 
 ###################
 #### CUDA stuff
 ###################
-RUN echo "/usr/local/cuda-10.1/lib64/" >/etc/ld.so.conf.d/cuda.conf
+RUN echo "/usr/local/cuda-11.4/lib64/" >/etc/ld.so.conf.d/cuda.conf
 
 # For CUDA profiling, TensorFlow requires CUPTI.
-RUN echo "/usr/local/cuda-10.1/extras/CUPTI/lib64/" >>/etc/ld.so.conf.d/cuda.conf
+RUN echo "/usr/local/cuda-11.4/extras/CUPTI/lib64/" >>/etc/ld.so.conf.d/cuda.conf
 
 # make sure we have a way to bind host provided libraries
 # see https://github.com/singularityware/singularity/issues/611
