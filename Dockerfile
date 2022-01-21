@@ -8,10 +8,20 @@ ENV DEBIAN_FRONTEND=nonintercative
 ###################
 #### CUDA stuff
 ###################
+
 RUN echo "/usr/local/cuda-11.4/lib64/" >/etc/ld.so.conf.d/cuda.conf
 
-# For CUDA profiling, TensorFlow requires CUPTI.
-RUN echo "/usr/local/cuda-11.4/extras/CUPTI/lib64/" >>/etc/ld.so.conf.d/cuda.conf
+# install cudnn
+ARG cudnn_version=8.2.4.15
+ARG cuda_version=cuda11.4
+ARG os=ubuntu2004
+
+RUN wget https://developer.download.nvidia.com/compute/cuda/repos/$OS/x86_64/cuda-$OS.pin
+RUN mv cuda-$OS.pin /etc/apt/preferences.d/cuda-repository-pin-600
+RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/$OS/x86_64/7fa2af80.pub
+RUN add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/$OS/x86_64/ /"
+RUN apt-get update && apt-get install libcudnn8=$cudnn_version-1+$cuda_version
+
 
 # make sure we have a way to bind host provided libraries
 # see https://github.com/singularityware/singularity/issues/611
@@ -55,12 +65,9 @@ RUN apt-get update && apt-get install -y --allow-unauthenticated \
     libpng-dev \
     libxpm-dev \
     libzmq3-dev \
-    # module-init-tools replaced with kmod \
     kmod \
     pkg-config \
-    # python3.8 - comes with ubuntu 20.04\
     python3-venv \
-    # python-pip \
     python3-pip \
     python3-dev \
     rsync \
@@ -71,7 +78,6 @@ RUN apt-get update && apt-get install -y --allow-unauthenticated \
     openjdk-8-jdk \
     openjdk-8-jre-headless \
     vim \
-    # bazel \
     xvfb \
     python-opengl \
     libhdf5-dev \
@@ -89,7 +95,6 @@ RUN apt-get update && apt-get install -y --allow-unauthenticated \
 ## xvfb python-opengl \
 ###################################
 
-# RUN python -m pip install --upgrade pip setuptools wheel
 RUN python3 -m pip install --upgrade pip setuptools wheel
 RUN python3.8 -m pip install --upgrade pip setuptools wheel
 
