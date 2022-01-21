@@ -5,6 +5,21 @@ LABEL maintainer Ilija Vukotic <ivukotic@cern.ch>
 
 ENV DEBIAN_FRONTEND=nonintercative
 
+#################
+#### curl/wget/software-properties-common
+#################
+RUN apt-get update && apt-get install \
+    curl \
+    wget \
+    unzip \
+    zip \
+    vim \
+    rsync \
+    software-properties-common -y
+
+# for newer python
+RUN add-apt-repository ppa:deadsnakes/ppa
+
 ###################
 #### CUDA stuff
 ###################
@@ -27,14 +42,6 @@ RUN apt-get update && apt-get install libcudnn8=$cudnn_version-1+$cuda_version
 # see https://github.com/singularityware/singularity/issues/611
 RUN mkdir -p /host-libs && \
     echo "/host-libs/" >/etc/ld.so.conf.d/000-host-libs.conf
-
-
-#################
-#### curl/wget/software-properties-common
-#################
-RUN apt-get update && apt-get install curl wget software-properties-common -y
-# for newer python
-RUN add-apt-repository ppa:deadsnakes/ppa
 
 ###################
 #### ROOT
@@ -70,14 +77,10 @@ RUN apt-get update && apt-get install -y --allow-unauthenticated \
     python3-venv \
     python3-pip \
     python3-dev \
-    rsync \
     software-properties-common \
-    unzip \
-    zip \
     zlib1g-dev \
     openjdk-8-jdk \
     openjdk-8-jre-headless \
-    vim \
     xvfb \
     python-opengl \
     libhdf5-dev \
