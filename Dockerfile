@@ -3,6 +3,8 @@ FROM nvidia/cuda:11.4.3-devel-ubuntu20.04
 
 LABEL maintainer Ilija Vukotic <ivukotic@cern.ch>
 
+ENV DEBIAN_FRONTEND=nonintercative
+
 ###################
 #### CUDA stuff
 ###################
@@ -46,8 +48,7 @@ RUN cd /opt && \
 ####################
 # xvfb, python-opengl, python3-tk, swig, ffmpeg - this is needed for visualizations in OpenAI 
 
-RUN export DEBIAN_FRONTEND=noninteractive && \
-    apt-get update && apt-get install -y --allow-unauthenticated \
+RUN apt-get update && apt-get install -y --allow-unauthenticated \
     build-essential \
     git \
     libfreetype6-dev \
@@ -56,7 +57,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     libzmq3-dev \
     module-init-tools \
     pkg-config \
-    python3.8 \
+    # python3.8 - comes with ubuntu 20.04\
     python3-venv \
     python-pip \
     python3-pip \
