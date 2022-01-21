@@ -55,7 +55,8 @@ RUN apt-get update && apt-get install -y --allow-unauthenticated \
     libpng-dev \
     libxpm-dev \
     libzmq3-dev \
-    module-init-tools \
+    # module-init-tools replaced with kmod \
+    kmod \
     pkg-config \
     # python3.8 - comes with ubuntu 20.04\
     python3-venv \
