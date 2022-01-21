@@ -1,5 +1,5 @@
 
-FROM nvidia/cuda:11.4.3-devel-ubuntu18.04
+FROM nvidia/cuda:11.4.3-devel-ubuntu20.04
 
 LABEL maintainer Ilija Vukotic <ivukotic@cern.ch>
 
