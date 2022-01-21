@@ -27,12 +27,12 @@ RUN add-apt-repository ppa:deadsnakes/ppa
 RUN echo "/usr/local/cuda-11.4/lib64/" >/etc/ld.so.conf.d/cuda.conf
 
 # install cudnn
-ARG os=ubuntu2004
-ARG cudnn_version=8.2.4.15
-ARG cuda_version=cuda11.4
+ENV os=ubuntu2004
+ENV cudnn_version=8.2.4.15
+ENV cuda_version=cuda11.4
 
 RUN wget https://developer.download.nvidia.com/compute/cuda/repos/$OS/x86_64/cuda-${OS}.pin
-RUN mv cuda-$OS.pin /etc/apt/preferences.d/cuda-repository-pin-600
+RUN mv cuda-${OS}.pin /etc/apt/preferences.d/cuda-repository-pin-600
 RUN apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/7fa2af80.pub
 RUN add-apt-repository "deb https://developer.download.nvidia.com/compute/cuda/repos/${OS}/x86_64/ /"
 RUN apt-get update && apt-get install libcudnn8=${cudnn_version}-1+${cuda_version}
