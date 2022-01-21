@@ -59,7 +59,7 @@ RUN apt-get update && apt-get install -y --allow-unauthenticated \
     pkg-config \
     # python3.8 - comes with ubuntu 20.04\
     python3-venv \
-    python-pip \
+    # python-pip \
     python3-pip \
     python3-dev \
     rsync \
