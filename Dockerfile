@@ -47,9 +47,9 @@ RUN mkdir -p /host-libs && \
 #### ROOT
 ###################
 RUN cd /opt && \
-    wget -nv https://root.cern/download/root_v6.22.00.Linux-ubuntu18-x86_64-gcc7.5.tar.gz && \
-    tar xzf root_v6.22.00.Linux-ubuntu18-x86_64-gcc7.5.tar.gz && \
-    rm -f root_v6.22.00.Linux-ubuntu18-x86_64-gcc7.5.tar.gz && \
+    wget -nv https://root.cern/download/root_v6.24.06.Linux-ubuntu18-x86_64-gcc7.5.tar.gz && \
+    tar xzf root_v6.24.06.Linux-ubuntu18-x86_64-gcc7.5.tar.gz && \
+    rm -f root_v6.24.06.Linux-ubuntu18-x86_64-gcc7.5.tar.gz && \
     cd /opt/root/ && \
     /bin/bash bin/thisroot.sh
 
