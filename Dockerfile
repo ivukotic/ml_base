@@ -17,8 +17,9 @@ RUN apt-get update && apt-get install \
     rsync \
     software-properties-common -y
 
-# for newer python
+# for python3.6... 2.7 and 3.8 come by default
 RUN add-apt-repository ppa:deadsnakes/ppa
+RUN apt-get install python3.6 -y
 
 ###################
 #### CUDA stuff
@@ -98,7 +99,7 @@ RUN apt-get update && apt-get install -y --allow-unauthenticated \
 ## xvfb python-opengl \
 ###################################
 
-RUN python3 -m pip install --upgrade pip setuptools wheel
+RUN python3.6 -m pip install --upgrade pip setuptools wheel
 RUN python3.8 -m pip install --upgrade pip setuptools wheel
 
 
