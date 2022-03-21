@@ -14,6 +14,7 @@ RUN apt-get update && apt-get install \
     unzip \
     zip \
     vim \
+    jq \
     rsync \
     software-properties-common -y
 
