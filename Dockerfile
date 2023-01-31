@@ -86,6 +86,7 @@ RUN apt-get update && apt-get install -y --allow-unauthenticated \
     xvfb \
     python-opengl \
     libhdf5-dev \
+    fonts-texgyre \
     && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
