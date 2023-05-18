@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install \
 
 # for python3.6... 2.7 and 3.8 come by default
 RUN add-apt-repository ppa:deadsnakes/ppa
-RUN apt-get install python3.6 -y
+RUN apt-get install python3.6 python3.6-distutils -y
 
 ###################
 #### CUDA stuff
