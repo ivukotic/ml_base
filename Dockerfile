@@ -30,7 +30,8 @@ RUN echo "/usr/local/cuda-11.4/lib64/" >/etc/ld.so.conf.d/cuda.conf
 
 # install cudnn
 ARG OS=ubuntu2004
-ARG cudnn_version=8.2.4.15
+# ARG cudnn_version=8.2.4.15
+ARG cudnn_version=8.6.0
 ARG cuda_version=cuda11.4
 
 RUN wget https://developer.download.nvidia.com/compute/cuda/repos/$OS/x86_64/cuda-$OS.pin
