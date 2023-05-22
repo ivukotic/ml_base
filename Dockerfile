@@ -1,5 +1,5 @@
 
-FROM nvidia/cuda:11.4.3-devel-ubuntu20.04
+FROM nvidia/cuda:11.8.0-devel-ubuntu20.04
 
 LABEL maintainer Ilija Vukotic <ivukotic@cern.ch>
 
@@ -32,7 +32,7 @@ RUN echo "/usr/local/cuda-11.4/lib64/" >/etc/ld.so.conf.d/cuda.conf
 ARG OS=ubuntu2004
 # ARG cudnn_version=8.2.4.15
 ARG cudnn_version=8.6.0
-ARG cuda_version=cuda11.4
+ARG cuda_version=cuda11.8
 
 RUN wget https://developer.download.nvidia.com/compute/cuda/repos/$OS/x86_64/cuda-$OS.pin
 RUN mv cuda-$OS.pin /etc/apt/preferences.d/cuda-repository-pin-600
