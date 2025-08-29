@@ -37,9 +37,9 @@ RUN mkdir -p /host-libs && \
 #### ROOT
 ###################
 RUN cd /opt && \
-    wget -nv https://root.cern/download/root_v6.36.00.Linux-ubuntu24.04-x86_64-gcc13.3.tar.gz && \
-    tar xzf root_v6.36.00.Linux-ubuntu24.04-x86_64-gcc13.3.tar.gz && \
-    rm -f root_v6.36.00.Linux-ubuntu24.04-x86_64-gcc13.3.tar.gz && \
+    wget -nv https://root.cern/download/root_v6.36.04.Linux-ubuntu24.04-x86_64-gcc13.3.tar.gz && \
+    tar xzf root_v6.36.04.Linux-ubuntu24.04-x86_64-gcc13.3.tar.gz && \
+    rm -f root_v6.36.04.Linux-ubuntu24.04-x86_64-gcc13.3.tar.gz && \
     cd /opt/root/ && \
     /bin/bash bin/thisroot.sh
 
