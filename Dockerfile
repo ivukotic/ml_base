@@ -1,4 +1,4 @@
-FROM nvidia/cuda:13.0.0-cudnn-devel-ubuntu24.04
+FROM nvidia/cuda:12.9.1-cudnn-devel-ubuntu24.04
 
 LABEL maintainer="Ilija Vukotic <ivukotic@cern.ch>"
 
@@ -22,12 +22,12 @@ RUN apt-get update && apt-get install \
 #### CUDA stuff
 ###################
 
-RUN echo "/usr/local/cuda-13.0/lib64/" >/etc/ld.so.conf.d/cuda.conf
+RUN echo "/usr/local/cuda-12.9.1/lib64/" >/etc/ld.so.conf.d/cuda.conf
 
 # install cudnn
 ARG OS=ubuntu2404
-ARG cudnn_version=9.12.0.46-1
-ARG cuda_version=cuda13.0
+ARG cudnn_version=9.10.2.21-1
+ARG cuda_version=cuda12.9.1
 
 # make sure we have a way to bind host provided libraries
 # see https://github.com/singularityware/singularity/issues/611
