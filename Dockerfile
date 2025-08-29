@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install \
     vim \
     jq \
     rsync \
+    libtbb-dev \
     software-properties-common -y
 
 ###################
