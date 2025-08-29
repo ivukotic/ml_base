@@ -1,8 +1,8 @@
-FROM nvidia/cuda:12.6.2-cudnn-devel-ubuntu24.04
+FROM nvidia/cuda:13.0.0-cudnn-devel-ubuntu24.04
 
 LABEL maintainer="Ilija Vukotic <ivukotic@cern.ch>"
 
-ENV DEBIAN_FRONTEND=nonintercative
+ENV DEBIAN_FRONTEND=noninteractive
 
 #################
 #### curl/wget/software-properties-common
@@ -21,13 +21,12 @@ RUN apt-get update && apt-get install \
 #### CUDA stuff
 ###################
 
-RUN echo "/usr/local/cuda-12.6/lib64/" >/etc/ld.so.conf.d/cuda.conf
+RUN echo "/usr/local/cuda-13.0/lib64/" >/etc/ld.so.conf.d/cuda.conf
 
 # install cudnn
 ARG OS=ubuntu2404
-# ARG cudnn_version=8.2.4.15
-ARG cudnn_version=8.6.0
-ARG cuda_version=cuda12.6
+ARG cudnn_version=9.12.0.46-1
+ARG cuda_version=cuda13.0
 
 # make sure we have a way to bind host provided libraries
 # see https://github.com/singularityware/singularity/issues/611
@@ -38,9 +37,9 @@ RUN mkdir -p /host-libs && \
 #### ROOT
 ###################
 RUN cd /opt && \
-    wget -nv https://root.cern/download/root_v6.32.04.Linux-ubuntu24.04-x86_64-gcc13.2.tar.gz && \
-    tar xzf root_v6.32.04.Linux-ubuntu24.04-x86_64-gcc13.2.tar.gz && \
-    rm -f root_v6.32.04.Linux-ubuntu24.04-x86_64-gcc13.2.tar.gz && \
+    wget -nv https://root.cern/download/root_v6.36.00.Linux-ubuntu24.04-x86_64-gcc13.3.tar.gz && \
+    tar xzf root_v6.36.00.Linux-ubuntu24.04-x86_64-gcc13.3.tar.gz && \
+    rm -f root_v6.36.00.Linux-ubuntu24.04-x86_64-gcc13.3.tar.gz && \
     cd /opt/root/ && \
     /bin/bash bin/thisroot.sh
 
