@@ -65,6 +65,9 @@ RUN apt-get update && apt-get install -y --allow-unauthenticated \
     # python-opengl \
     libhdf5-dev \
     fonts-texgyre \
+    libtbb12 \
     && \
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* && \
+    python3 -m pip install -U pip wheel && \
+    python3 -m pip install rucio-jupyterlab
