@@ -3,7 +3,7 @@ name: Build ML base image
 on:
   push:
     branches:
-      - "OctUpgrade"
+      - "2026/Feb"
 
 jobs:
   docker:
